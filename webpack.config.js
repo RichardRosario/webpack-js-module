@@ -7,7 +7,8 @@ const config = {
   //2nd property for webpack to work
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: 'build/'
   },
   mode: 'development',
   module: {
@@ -21,6 +22,16 @@ const config = {
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader'
+        ]
+      },
+      {
+        test: /\.(jpg?g|png|gif|svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: { limit: 40000 }
+          },
+          'image-webpack-loader'
         ]
       }
     ]
