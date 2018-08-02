@@ -1,4 +1,5 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
   //first required property for webpack to work
@@ -14,9 +15,21 @@ const config = {
       {
         test: /\.js$/,
         use: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
       }
     ]
-  }
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'style.css'
+    })
+  ]
 };
 
 module.exports = config;
